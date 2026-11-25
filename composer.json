@@ -1,0 +1,14 @@
+{
+    "name": "vcorexplatform/session",
+    "description": "Cookie-based PHP sessions for Starter",
+    "type": "library",
+    "require": {
+        "php": "^8.4",
+        "ext-session": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Core\\Http\\": "src/"
+        }
+    }
+}
