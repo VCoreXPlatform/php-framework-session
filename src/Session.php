@@ -6,7 +6,7 @@ namespace Core\Http;
 
 use RuntimeException;
 
-final class Session
+final class Session implements SessionStore
 {
     private const string COOKIE_NAME = 'FRAMEWORKSID';
     private bool $started = false;
@@ -69,6 +69,14 @@ final class Session
     {
         $this->start();
         unset($_SESSION[$key]);
+    }
+
+    public function regenerate(): void
+    {
+        $this->start();
+        if (headers_sent() || !session_regenerate_id(true)) {
+            throw new RuntimeException('Unable to regenerate the session ID');
+        }
     }
 
     public function close(): void
